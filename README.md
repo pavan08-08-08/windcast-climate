@@ -8,7 +8,7 @@ See `PROJECT_CONTEXT.md` for the full project context and rules.
 Needs Docker Desktop and Python 3.9 to 3.12 (3.12 recommended; numpy 2.0.2 has no wheel for 3.13).
 
 ```bash
-git clone https://github.com/Jayadharshini-dev/windcast-climate.git
+git clone https://github.com/pavan08-08-08/windcast-climate.git
 cd windcast-climate
 cp .env.example .env                       # once; if port 5432 is busy, add DB_HOST_PORT=5433 to .env
 python3 -m venv .venv && source .venv/bin/activate
