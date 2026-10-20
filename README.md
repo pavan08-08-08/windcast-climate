@@ -23,8 +23,14 @@ streamlit run dashboard/app.py             # opens the dashboard at http://local
 result matches `data/golden/tn_daily_golden.csv`. If it prints `Done. Database is ready.`, the
 database is correct. Run `pytest` afterwards to check everything (about 36 tests).
 
-If the database is on port 5433, put `DATABASE_URL=postgresql://windcast:windcast_dev@localhost:5433/windcast`
-in `.env`.
+### If something goes wrong
+
+| Message | Cause and fix |
+| --- | --- |
+| `docker: command not found`, or `failed to connect to the docker API` | Docker Desktop is not running. Open it and wait until it says the engine is running. |
+| `port is already allocated`, or `password authentication failed for user "windcast"` | Another Postgres already uses port 5432, so the script reached the wrong database. In `.env`, change **both** `DB_HOST_PORT=5433` and the `DATABASE_URL` line to end in `:5433/windcast` (edit the existing lines; a second `DATABASE_URL` line is ignored). Then `docker compose up -d` and run the command again. |
+| `XGBoost Library (libxgboost.dylib) could not be loaded` (Mac) | XGBoost needs the OpenMP library. `conda install -c conda-forge llvm-openmp`, or `brew install libomp`. Only the model code and its tests need this. |
+| `pip install` hangs building numpy | Python 3.13 has no numpy 2.0.2 wheel. Use Python 3.12 (`conda create -n windcast python=3.12`). |
 
 ### The full pipeline, end to end
 
